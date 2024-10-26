@@ -1,0 +1,120 @@
+services:
+#===PORTAINER================
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${USERDIR}/docker/portainer/data:/data
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - TZ=${TZ}
+
+#===Watchtower================
+  watchtower:
+    container_name: watchtower
+    restart: always
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --schedule "0 0 4 * * *" --cleanup
+
+#===NZBGET====================
+#  nzbget:
+#    image: "linuxserver/nzbget"
+#    container_name: "nzbget"
+#    volumes:
+#      - ${USERDIR}/docker/nzbget:/config
+#      - ${USERDIR}/Downloads:/downloads
+#      - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
+#      - ${USERDIR}/docker/shared:/shared
+#      - ${USERDIR}/docker/media:/Media
+#    ports:
+#      - "8082:6789"
+#    restart: always
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+
+#===SABNZDB====================
+  sabnzdb:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: "sabnzdb"
+    volumes:
+      - ${USERDIR}/docker/sabnzdb:/config
+      - ${USERDIR}/Downloads:/downloads
+      - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
+      - ${USERDIR}/docker/shared:/shared
+      - ${USERDIR}/docker/media:/Media
+    ports:
+      - "8181:8080"
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+#      - DOCKER_MODS=linuxserver/mods@sabnzdb-par2cmdline-turbo
+
+#==RADARR======================
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: "radarr"
+    volumes:
+      - ${USERDIR}/docker/radarr:/config
+      - ${USERDIR}/Downloads:/downloads
+      - ${USERDIR}/docker/media:/movies
+      - "/etc/localtime:/etc/localtime:ro"
+      - ${USERDIR}/docker/shared:/shared
+      - ${USERDIR}/docker/media:/Media
+    ports:
+      - "7878:7878"
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+#==PLEX=================
+#  plexms:
+#    container_name: plexms
+#    restart: always
+#    image: plexinc/pms-docker
+#    network_mode: host
+#    volumes:
+#      - ${USERDIR}/docker/plexms:/config
+#      - ${USERDIR}/Downloads/plex_tmp:/transcode
+#      - ${USERDIR}/docker/media:/Media
+#      - /docker/shared:/shared
+#    devices:
+#      - /dev/dri:/dev/dri
+#    environment:
+#      - TZ=${TZ}
+#      - HOSTNAME="XXXXXXXXX"
+#      - PLEX_CLAIM="XXXXXXXXXXXX"
+#      - PLEX_UID=${PUID}
+#      - PLEX_GID=${PGID}
+#      - ADVERTISE_IP="XXXXXXXXXXX"
+
+#==SONARR v4======================
+  sonarrv4:
+    image: "linuxserver/sonarr:develop"
+    container_name: "sonarrv4BETA"
+    volumes:
+      - ${USERDIR}/docker/sonarr4:/config
+      - ${USERDIR}/Downloads:/downloads
+      - ${USERDIR}/docker/media:/tv
+      - "/etc/localtime:/etc/localtime:ro"
+      - ${USERDIR}/docker/shared:/shared
+      - ${USERDIR}/docker/media:/Media
+    ports:
+        - "8081:8989"
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
