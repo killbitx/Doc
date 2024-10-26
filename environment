@@ -1,0 +1,5 @@
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/>
+PUID=1000
+PGID=998
+TZ="America/Los_Angeles"
+USERDIR="/home/xxxxxxxxxxxx"
