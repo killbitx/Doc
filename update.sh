@@ -13,4 +13,4 @@ sudo rm -R ~/Downloads/completed/tv/
 echo "Updating All *Arrs, Plex"
 cd docker
 docker compose up -d
-echo "Recommend you do a reboot type 'sudo reboot now'"
+echo "Recommend you do a reboot, type 'sudo reboot now'"
