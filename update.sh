@@ -1,5 +1,5 @@
 #!/bin/bash
-#chmod +x update.sh
+#sudo chmod +x update.sh
 #./update.sh
 echo "Updating System Files"
 sudo apt update
