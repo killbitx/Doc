@@ -50,7 +50,6 @@ services:
       - ${USERDIR}/Downloads:/downloads
       - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
       - ${USERDIR}/docker/shared:/shared
-      - ${USERDIR}/docker/media:/Media
     ports:
       - "8181:8080"
     restart: always
@@ -67,10 +66,10 @@ services:
     volumes:
       - ${USERDIR}/docker/radarr:/config
       - ${USERDIR}/Downloads:/downloads
-      - ${USERDIR}/docker/media:/movies
+      - /media/NASPlexMediaNFS:/movies
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
-      - ${USERDIR}/docker/media:/Media
+      - /media/NASPlexMediaNFS:/Media
     ports:
       - "7878:7878"
     restart: always
@@ -107,10 +106,10 @@ services:
     volumes:
       - ${USERDIR}/docker/sonarr4:/config
       - ${USERDIR}/Downloads:/downloads
-      - ${USERDIR}/docker/media:/tv
+      - /media/NASPlexMediaNFS:/tv
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
-      - ${USERDIR}/docker/media:/Media
+      - /media/NASPlexMediaNFS:/Media
     ports:
         - "8081:8989"
     restart: always
