@@ -49,6 +49,8 @@ services:
       - ${USERDIR}/docker/sabnzdb:/config
       - ${USERDIR}/Downloads:/downloads
       - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
       - ${USERDIR}/docker/shared:/shared
     ports:
       - "8181:8080"
@@ -66,6 +68,8 @@ services:
     volumes:
       - ${USERDIR}/docker/radarr:/config
       - ${USERDIR}/Downloads:/downloads
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
       - /media/NASPlexMediaNFS:/movies
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
@@ -106,6 +110,8 @@ services:
     volumes:
       - ${USERDIR}/docker/sonarr4:/config
       - ${USERDIR}/Downloads:/downloads
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
+      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
       - /media/NASPlexMediaNFS:/tv
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
