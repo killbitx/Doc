@@ -32,7 +32,7 @@ services:
 #      - ${USERDIR}/Downloads:/downloads
 #      - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
 #      - ${USERDIR}/docker/shared:/shared
-#      - ${USERDIR}/docker/media:/Media
+#      - /media/NASPlexMediaNFS:/Media
 #    ports:
 #      - "8082:6789"
 #    restart: always
