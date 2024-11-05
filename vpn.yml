@@ -1,0 +1,53 @@
+#===WIREGUARD================
+#Taken from https://linuxiac.com/how-to-set-up-wireguard-vpn-with-docker/
+#ON LOGIN
+#To start, switch to the “Wireguard Server” tab. Then in the “Post Up Script” field, put:
+#iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#And respectively in “Post Down Script“:
+#iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+#Then click the “Save” button to save your changes, and finally, hit “Apply Config” to apply
+  wireguard:
+    image: linuxserver/wireguard:v1.0.20210914-ls6
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${USERDIR}/docker/wireguard/config:/config
+    ports:
+      # Port for WireGuard-UI
+      - 5000:5000
+      # Port of the WireGuard VPN server
+      - 51822:51820/udp
+    restart: unless-stopped
+
+  # WireGuard-UI service
+  wireguard-ui:
+    image: ngoduykhanh/wireguard-ui:latest
+    container_name: wireguard-ui
+    depends_on:
+      - wireguard
+    cap_add:
+      - NET_ADMIN
+    # Use the network of the 'wireguard' service
+    # This enables to show active clients in the status page
+    network_mode: service:wireguard
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - SENDGRID_API_KEY
+      - EMAIL_FROM_ADDRESS
+      - EMAIL_FROM_NAME
+      - SESSION_SECRET
+      - WGUI_USERNAME=XXXXXXXXXX
+      - WGUI_PASSWORD=XXXXXXXXXX
+      - WG_CONF_TEMPLATE
+      - WGUI_MANAGE_START=true
+      - WGUI_MANAGE_RESTART=true
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    volumes:
+      - ${USERDIR}/docker/wireguard/db:/app/db
+      - ${USERDIR}/docker/wireguard/config:/etc/wireguard
