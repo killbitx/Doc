@@ -50,7 +50,7 @@ services:
       - ${USERDIR}/Downloads:/downloads
       - ${USERDIR}/Downloads/incomplete:/incomplete-downloads
       - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
-      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
+      - ${USERDIR}/Downloads/completed/movies:/downloads/completed/movies      
       - ${USERDIR}/docker/shared:/shared
     ports:
       - "8181:8080"
@@ -69,7 +69,7 @@ services:
       - ${USERDIR}/docker/radarr:/config
       - ${USERDIR}/Downloads:/downloads
       - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
-      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
+      - ${USERDIR}/Downloads/completed/movies:/downloads/completed/movies      
       - /media/NASPlexMediaNFS:/movies
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
@@ -92,7 +92,7 @@ services:
 #      - ${USERDIR}/docker/plexms:/config
 #      - ${USERDIR}/Downloads/plex_tmp:/transcode
 #      - ${USERDIR}/docker/media:/Media
-#      - /docker/shared:/shared
+#      - ${USERDIR}/docker/shared:/shared
 #    devices:
 #      - /dev/dri:/dev/dri
 #    environment:
@@ -111,7 +111,7 @@ services:
       - ${USERDIR}/docker/sonarr4:/config
       - ${USERDIR}/Downloads:/downloads
       - ${USERDIR}/Downloads/completed/tv:/downloads/completed/tv
-      - ${USERDIR}/Downloads/completed/tv:/downloads/completed/Movies      
+      - ${USERDIR}/Downloads/completed/movies:/downloads/completed/movies      
       - /media/NASPlexMediaNFS:/tv
       - "/etc/localtime:/etc/localtime:ro"
       - ${USERDIR}/docker/shared:/shared
