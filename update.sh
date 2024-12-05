@@ -8,7 +8,7 @@ echo "Backing Up Plex Meta Data To NAS"
 sudo rsync -avW ~/docker/.  /media/NASPlexMediaNFS/BackupPlex/
 echo "Cleaning up any incomplete downloads"
 sudo rm -R ~/Downloads/incomplete/
-sudo rm -R ~/Downloads/completed/Movies/
+sudo rm -R ~/Downloads/completed/movies/
 sudo rm -R ~/Downloads/completed/tv/
 echo "Updating All *Arrs, Plex"
 cd docker
